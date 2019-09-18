@@ -25,6 +25,12 @@ public:
 	virtual string GetName() = 0;
 	virtual void SetName(string name) = 0;
 
+	virtual int GetPort() = 0;
+	virtual void SetPort(int port) = 0;
+
+	virtual string GetRemoteAddress() = 0;
+	virtual void SetRemoteAddress(string updateDate) = 0;
+
 	virtual string GetUpdateDate() = 0;
 	virtual void SetUpdateDate(string updateDate) = 0;
 
@@ -46,6 +52,12 @@ public:
 	string GetName();
 	void SetName(string name);
 
+	int GetPort();
+	void SetPort(int port);
+
+	string GetRemoteAddress();
+	void SetRemoteAddress(string updateDate);
+
 	string GetUpdateDate();
 	void SetUpdateDate(string date);
 
@@ -53,11 +65,13 @@ public:
 	void SetVersion(string version);
 
 private:
-	const string AUTHOR_KEYWORD = "author";
-	const string CREATION_DATE_KEYWORD = "creationDate";
-	const string NAME_KEYWORD = "name";
-	const string UPDATE_DATE_KEYWORD = "updateDate";
-	const string VERSION_KEYWORD = "version";
+	static const string AUTHOR_KEYWORD;
+	static const string CREATION_DATE_KEYWORD;
+	static const string NAME_KEYWORD;
+	static const string PORT_KEYWORD;
+	static const string REMOTE_ADDRESS_KEYWORD;
+	static const string UPDATE_DATE_KEYWORD;
+	static const string VERSION_KEYWORD;
 
 	const char SEPARATOR = ':';
 
@@ -70,7 +84,7 @@ private:
 	void setValue(string keyword, string value);
 };
 
-__declspec(dllexport) IDIBMDHandler *CreateNewDIBMDHandler()
+__declspec(dllexport) inline IDIBMDHandler *CreateNewDIBMDHandler()
 {
 	return new DIBMDHandler();
 }

@@ -3,7 +3,13 @@
 #include <fstream>
 #include <iterator>
 
-using namespace std;
+const string DIBMDHandler::AUTHOR_KEYWORD = "author";
+const string DIBMDHandler::CREATION_DATE_KEYWORD = "creationDate";
+const string DIBMDHandler::NAME_KEYWORD = "name";
+const string DIBMDHandler::PORT_KEYWORD = "port";
+const string DIBMDHandler::REMOTE_ADDRESS_KEYWORD = "remote";
+const string DIBMDHandler::UPDATE_DATE_KEYWORD = "updateDate";
+const string DIBMDHandler::VERSION_KEYWORD = "version";
 
 void DIBMDHandler::Initialize(string path)
 {
@@ -69,8 +75,6 @@ void DIBMDHandler::setValue(string keyword, string value)
 	{
 		string line;
 		getline(file, line);
-		if (line.length() == 0)
-			continue;
 
 		if (keywordEquals(line, keyword))
 		{
@@ -78,7 +82,8 @@ void DIBMDHandler::setValue(string keyword, string value)
 			found = true;
 		}
 
-		lines.push_back(line);
+		if (line.length() > 0)
+			lines.push_back(line);
 	}
 
 	if (!found)
@@ -94,7 +99,7 @@ void DIBMDHandler::createDIBMDFile()
 	file.close();
 }
 
-void DIBMDHandler::rewriteFile(vector<string>& data)
+void DIBMDHandler::rewriteFile(vector<string> &data)
 {
 	ofstream rewriteFile(path.c_str());
 	ostream_iterator<string> output_iterator(rewriteFile, "\n");
@@ -120,6 +125,26 @@ string DIBMDHandler::GetName()
 void DIBMDHandler::SetName(string name)
 {
 	setValue(NAME_KEYWORD, name);
+}
+
+int DIBMDHandler::GetPort()
+{
+	return stoi(getValue(PORT_KEYWORD));
+}
+
+void DIBMDHandler::SetPort(int port)
+{
+	setValue(PORT_KEYWORD, to_string(port));
+}
+
+string DIBMDHandler::GetRemoteAddress()
+{
+	return getValue(REMOTE_ADDRESS_KEYWORD);
+}
+
+void DIBMDHandler::SetRemoteAddress(string address)
+{
+	setValue(REMOTE_ADDRESS_KEYWORD, address);
 }
 
 string DIBMDHandler::GetUpdateDate()
