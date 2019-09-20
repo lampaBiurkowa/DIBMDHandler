@@ -157,12 +157,12 @@ void DIBMDHandler::SetUpdateDate(string date)
 	setValue(UPDATE_DATE_KEYWORD, date);
 }
 
-string DIBMDHandler::GetVersion()
+int DIBMDHandler::GetVersion()
 {
-	return getValue(VERSION_KEYWORD);
+	return stoi(getValue(VERSION_KEYWORD));
 }
 
-void DIBMDHandler::SetVersion(string version)
+void DIBMDHandler::SetVersion(int version)
 {
-	setValue(VERSION_KEYWORD, version);
+	setValue(VERSION_KEYWORD, to_string(version));
 }

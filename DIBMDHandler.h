@@ -5,40 +5,7 @@
 
 using namespace std;
 
-#ifdef DIBMDHANDLER_EXPORTS
-#define DIBMDHANDLER_API __declspec(dllexport)
-#else
-#define DIBMDHANDLER_API __declspec(dllimport)
-#endif
-
-class IDIBMDHandler
-{
-public:
-	virtual void Initialize(string path) = 0;
-
-	virtual string GetAuthor() = 0;
-	virtual void SetAuthor(string author) = 0;
-
-	virtual string GetCreationDate() = 0;
-	virtual void SetCreationDate(string creationDate) = 0;
-
-	virtual string GetName() = 0;
-	virtual void SetName(string name) = 0;
-
-	virtual int GetPort() = 0;
-	virtual void SetPort(int port) = 0;
-
-	virtual string GetRemoteAddress() = 0;
-	virtual void SetRemoteAddress(string updateDate) = 0;
-
-	virtual string GetUpdateDate() = 0;
-	virtual void SetUpdateDate(string updateDate) = 0;
-
-	virtual string GetVersion() = 0;
-	virtual void SetVersion(string version) = 0;
-};
-
-class DIBMDHandler : public IDIBMDHandler
+class DIBMDHandler
 {
 public:
 	void Initialize(string path);
@@ -61,8 +28,8 @@ public:
 	string GetUpdateDate();
 	void SetUpdateDate(string date);
 
-	string GetVersion();
-	void SetVersion(string version);
+	int GetVersion();
+	void SetVersion(int version);
 
 private:
 	static const string AUTHOR_KEYWORD;
@@ -73,7 +40,7 @@ private:
 	static const string UPDATE_DATE_KEYWORD;
 	static const string VERSION_KEYWORD;
 
-	const char SEPARATOR = ':';
+	static const char SEPARATOR = ':';
 
 	string path;
 
@@ -83,8 +50,3 @@ private:
 	string getValue(string keyword);
 	void setValue(string keyword, string value);
 };
-
-__declspec(dllexport) inline IDIBMDHandler *CreateNewDIBMDHandler()
-{
-	return new DIBMDHandler();
-}
