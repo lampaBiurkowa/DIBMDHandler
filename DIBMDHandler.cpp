@@ -2,7 +2,6 @@
 #include "DIBMDHandler.h"
 #include <fstream>
 #include <iterator>
-#include <iostream> //remove
 
 const string DIBMDHandler::AUTHOR_KEYWORD = "author";
 const string DIBMDHandler::CREATION_DATE_KEYWORD = "creationDate";
@@ -88,8 +87,6 @@ void DIBMDHandler::setValue(string keyword, string value)
 
 	if (!found)
 		lines.push_back(keyword + SEPARATOR + value);
-
-	cout << lines.size() << " " << keyword + SEPARATOR + value << " " << found << endl;
 
 	file.close();
 	rewriteFile(lines);

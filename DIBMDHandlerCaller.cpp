@@ -4,7 +4,7 @@
 DIBMDHandler* CreateDIBMDHandlerClass(char* path)
 {
 	DIBMDHandler* handler = new DIBMDHandler();
-	handler -> Initialize(path);
+	handler -> Initialize(string(path));
 	return handler;
 }
 
